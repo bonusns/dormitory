@@ -1,1 +1,1 @@
-print('Hello Sasha')
+print('tut nichego net')
