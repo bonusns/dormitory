@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import add_room, del_room, red_room, list_rooms
 
 
 class Ui_Rooms(object):
