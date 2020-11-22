@@ -13,6 +13,42 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_hostel(object):
 
+    def openRoom(self):
+        from rooms import Ui_Rooms
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Rooms()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openAdd(self):
+        from add_hostel import Ui_add_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_add_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openDel(self):
+        from del_hostel import Ui_del_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_del_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openRed(self):
+        from red_hostel import Ui_red_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_red_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openList(self):
+        from list_hostel import Ui_list_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_list_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+
     def openMain(self):
         from Main import Ui_Main
         self.window = QtWidgets.QMainWindow()
@@ -92,6 +128,10 @@ class Ui_hostel(object):
         self.add_hostel_btn.setFont(font)
         self.add_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.add_hostel_btn.setObjectName("add_hostel_btn")
+
+        self.add_hostel_btn.clicked.connect(self.openAdd)
+        self.add_hostel_btn.clicked.connect(hostel.close)
+
         self.gridLayout.addWidget(self.add_hostel_btn, 0, 0, 1, 1)
         self.red_hostel_btn = QtWidgets.QPushButton(self.layoutWidget)
         self.red_hostel_btn.setMinimumSize(QtCore.QSize(150, 40))
@@ -140,6 +180,10 @@ class Ui_hostel(object):
         self.red_hostel_btn.setFont(font)
         self.red_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.red_hostel_btn.setObjectName("red_hostel_btn")
+
+        self.red_hostel_btn.clicked.connect(self.openRed)
+        self.red_hostel_btn.clicked.connect(hostel.close)
+
         self.gridLayout.addWidget(self.red_hostel_btn, 1, 0, 1, 1)
         self.del_hostel_btn = QtWidgets.QPushButton(self.layoutWidget)
         self.del_hostel_btn.setMinimumSize(QtCore.QSize(150, 40))
@@ -188,6 +232,10 @@ class Ui_hostel(object):
         self.del_hostel_btn.setFont(font)
         self.del_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.del_hostel_btn.setObjectName("del_hostel_btn")
+
+        self.del_hostel_btn.clicked.connect(self.openDel)
+        self.del_hostel_btn.clicked.connect(hostel.close)
+
         self.gridLayout.addWidget(self.del_hostel_btn, 2, 0, 1, 1)
         self.main_hostel_btn = QtWidgets.QPushButton(self.layoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
@@ -293,6 +341,10 @@ class Ui_hostel(object):
         self.list_hostel_btn.setFont(font)
         self.list_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.list_hostel_btn.setObjectName("list_hostel_btn")
+
+        self.list_hostel_btn.clicked.connect(self.openList)
+        self.list_hostel_btn.clicked.connect(hostel.close)
+
         self.gridLayout.addWidget(self.list_hostel_btn, 0, 2, 1, 1)
         spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 0, 1, 1, 1)
@@ -343,6 +395,10 @@ class Ui_hostel(object):
         self.room_hostel_btn.setFont(font)
         self.room_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.room_hostel_btn.setObjectName("room_hostel_btn")
+
+        self.room_hostel_btn.clicked.connect(self.openRoom)
+        self.room_hostel_btn.clicked.connect(hostel.close)
+
         self.gridLayout.addWidget(self.room_hostel_btn, 1, 2, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout)
         hostel.setCentralWidget(self.centralwidget)

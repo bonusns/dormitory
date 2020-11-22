@@ -12,6 +12,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_red_hostel_2(object):
+
+    def openRed(self):
+        from red_hostel import Ui_red_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_red_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, red_hostel_2):
         red_hostel_2.setObjectName("red_hostel_2")
         red_hostel_2.resize(680, 300)
@@ -259,6 +267,10 @@ class Ui_red_hostel_2(object):
         self.back_to_red_hostel_btn.setFont(font)
         self.back_to_red_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_red_hostel_btn.setObjectName("back_to_red_hostel_btn")
+
+        self.back_to_red_hostel_btn.clicked.connect(self.openRed)
+        self.back_to_red_hostel_btn.clicked.connect(red_hostel_2.close)
+
         self.horizontalLayout.addWidget(self.back_to_red_hostel_btn)
         red_hostel_2.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(red_hostel_2)

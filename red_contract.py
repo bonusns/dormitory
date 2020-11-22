@@ -12,6 +12,22 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_red_contract(object):
+
+    def openRedContract(self):
+        from red_contract_3 import Ui_red_contract_3
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_red_contract_3()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openContract(self):
+        from contract import Ui_contract
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_contract()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+
     def setupUi(self, red_contract):
         red_contract.setObjectName("red_contract")
         red_contract.resize(680, 300)
@@ -252,6 +268,10 @@ class Ui_red_contract(object):
         self.back_to_contract_btn.setFont(font)
         self.back_to_contract_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_contract_btn.setObjectName("back_to_contract_btn")
+
+        self.back_to_contract_btn.clicked.connect(self.openContract)
+        self.back_to_contract_btn.clicked.connect(red_contract.close)
+
         self.horizontalLayout.addWidget(self.back_to_contract_btn)
         self.label_FIO_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_FIO_2.setGeometry(QtCore.QRect(60, 110, 130, 30))
@@ -310,6 +330,10 @@ class Ui_red_contract(object):
         self.red_contract_btn.setFont(font)
         self.red_contract_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.red_contract_btn.setObjectName("red_contract_btn")
+
+        self.red_contract_btn.clicked.connect(self.openRedContract)
+        self.red_contract_btn.clicked.connect(red_contract.close)
+
         self.Contract_list = QtWidgets.QListWidget(self.centralwidget)
         self.Contract_list.setGeometry(QtCore.QRect(60, 200, 400, 60))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)

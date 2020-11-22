@@ -12,6 +12,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_del_hostel(object):
+
+    def openHostel(self):
+        from hostel import Ui_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, del_hostel):
         del_hostel.setObjectName("del_hostel")
         del_hostel.resize(680, 300)
@@ -259,6 +267,10 @@ class Ui_del_hostel(object):
         self.back_to_hostel_btn.setFont(font)
         self.back_to_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_hostel_btn.setObjectName("back_to_hostel_btn")
+
+        self.back_to_hostel_btn.clicked.connect(self.openHostel)
+        self.back_to_hostel_btn.clicked.connect(del_hostel.close)
+
         self.horizontalLayout.addWidget(self.back_to_hostel_btn)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(80, 120, 47, 13))

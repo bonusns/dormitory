@@ -12,6 +12,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_red_contract_2(object):
+
+    def openRed_client_2(self):
+        from red_client_2 import Ui_red_client_2
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_red_client_2()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, red_contract_2):
         red_contract_2.setObjectName("red_contract_2")
         red_contract_2.resize(680, 400)
@@ -343,8 +351,8 @@ class Ui_red_contract_2(object):
         self.red_contract_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.red_contract_btn.setObjectName("red_contract_btn")
         self.horizontalLayout.addWidget(self.red_contract_btn)
-        self.back_to_red_contract_btn = QtWidgets.QPushButton(self.layoutWidget)
-        self.back_to_red_contract_btn.setMinimumSize(QtCore.QSize(150, 40))
+        self.back_to_red_client_btn = QtWidgets.QPushButton(self.layoutWidget)
+        self.back_to_red_client_btn.setMinimumSize(QtCore.QSize(150, 40))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(135, 206, 235))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -382,15 +390,19 @@ class Ui_red_contract_2(object):
         brush = QtGui.QBrush(QtGui.QColor(135, 206, 235))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.back_to_red_contract_btn.setPalette(palette)
+        self.back_to_red_client_btn.setPalette(palette)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
-        self.back_to_red_contract_btn.setFont(font)
-        self.back_to_red_contract_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
-        self.back_to_red_contract_btn.setObjectName("back_to_red_contract_btn")
-        self.horizontalLayout.addWidget(self.back_to_red_contract_btn)
+        self.back_to_red_client_btn.setFont(font)
+        self.back_to_red_client_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
+        self.back_to_red_client_btn.setObjectName("back_to_red_client_btn")
+
+        self.back_to_red_client_btn.clicked.connect(self.openRed_client_2)
+        self.back_to_red_client_btn.clicked.connect(red_contract_2.close)
+
+        self.horizontalLayout.addWidget(self.back_to_red_client_btn)
         self.CostBox = QtWidgets.QComboBox(self.centralwidget)
         self.CostBox.setGeometry(QtCore.QRect(220, 320, 400, 30))
         palette = QtGui.QPalette()
@@ -467,7 +479,7 @@ class Ui_red_contract_2(object):
         self.RoomBox.setItemText(0, _translate("red_contract_2", "Бюджет"))
         self.RoomBox.setItemText(1, _translate("red_contract_2", "Платное обучение"))
         self.red_contract_btn.setText(_translate("red_contract_2", "Отредактировать"))
-        self.back_to_red_contract_btn.setText(_translate("red_contract_2", "Вернуться к поиску договора"))
+        self.back_to_red_client_btn.setText(_translate("red_contract_2", "Вернуться к поиску клиента"))
         self.CostBox.setItemText(0, _translate("red_contract_2", "Бюджет"))
         self.CostBox.setItemText(1, _translate("red_contract_2", "Платное обучение"))
 

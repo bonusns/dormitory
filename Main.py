@@ -11,14 +11,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Main(object):
-    def openClient(self):              # Это функция открытия клиента, вызываю её по нажатию кнопки на 130 строке, там две выделенные строчки
+    def openClient(self):
         from Client import Ui_Client
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_Client()
         self.ui.setupUi(self.window)
         self.window.show()
         
-    def openHostel(self):       # Аналогично с отелем и контрактом, вызываются на 271 и 201 соответственно
+    def openHostel(self):
         from hostel import Ui_hostel
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_hostel()
@@ -29,6 +29,13 @@ class Ui_Main(object):
         from contract import Ui_contract
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_contract()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openReference(self):
+        from reference import Ui_reference
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_reference()
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -337,6 +344,10 @@ class Ui_Main(object):
         self.help_btn.setFont(font)
         self.help_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.help_btn.setObjectName("help_btn")
+
+        self.help_btn.clicked.connect(self.openReference)
+        self.help_btn.clicked.connect(Main.close)
+
         self.verticalLayout.addWidget(self.help_btn)
         self.exit_btn = QtWidgets.QPushButton(self.centralwidget)
         self.exit_btn.setMinimumSize(QtCore.QSize(0, 30))
@@ -403,6 +414,9 @@ class Ui_Main(object):
         self.exit_btn.setFont(font)
         self.exit_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.exit_btn.setObjectName("exit_btn")
+
+        self.exit_btn.clicked.connect(Main.close)
+
         self.verticalLayout.addWidget(self.exit_btn)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         Main.setCentralWidget(self.centralwidget)

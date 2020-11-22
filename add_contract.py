@@ -12,6 +12,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_add_contract(object):
+
+    def openAdd_Client(self):
+        from Add_Client import Ui_add_client
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_add_client()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, add_contract):
         add_contract.setObjectName("add_contract")
         add_contract.resize(680, 400)
@@ -289,7 +297,7 @@ class Ui_add_contract(object):
         self.RoomBox.addItem("")
         self.RoomBox.addItem("")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(120, 20, 431, 42))
+        self.layoutWidget.setGeometry(QtCore.QRect(110, 20, 451, 42))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -343,8 +351,8 @@ class Ui_add_contract(object):
         self.add_contract_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.add_contract_btn.setObjectName("add_contract_btn")
         self.horizontalLayout.addWidget(self.add_contract_btn)
-        self.back_to_contract_btn = QtWidgets.QPushButton(self.layoutWidget)
-        self.back_to_contract_btn.setMinimumSize(QtCore.QSize(150, 40))
+        self.back_to_add_client_btn = QtWidgets.QPushButton(self.layoutWidget)
+        self.back_to_add_client_btn.setMinimumSize(QtCore.QSize(150, 40))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(135, 206, 235))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -382,15 +390,19 @@ class Ui_add_contract(object):
         brush = QtGui.QBrush(QtGui.QColor(135, 206, 235))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.back_to_contract_btn.setPalette(palette)
+        self.back_to_add_client_btn.setPalette(palette)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
-        self.back_to_contract_btn.setFont(font)
-        self.back_to_contract_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
-        self.back_to_contract_btn.setObjectName("back_to_contract_btn")
-        self.horizontalLayout.addWidget(self.back_to_contract_btn)
+        self.back_to_add_client_btn.setFont(font)
+        self.back_to_add_client_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
+        self.back_to_add_client_btn.setObjectName("back_to_add_client_btn")
+
+        self.back_to_add_client_btn.clicked.connect(self.openAdd_Client)
+        self.back_to_add_client_btn.clicked.connect(add_contract.close)
+
+        self.horizontalLayout.addWidget(self.back_to_add_client_btn)
         self.CostBox = QtWidgets.QComboBox(self.centralwidget)
         self.CostBox.setGeometry(QtCore.QRect(220, 320, 400, 30))
         palette = QtGui.QPalette()
@@ -467,7 +479,7 @@ class Ui_add_contract(object):
         self.RoomBox.setItemText(0, _translate("add_contract", "Бюджет"))
         self.RoomBox.setItemText(1, _translate("add_contract", "Платное обучение"))
         self.add_contract_btn.setText(_translate("add_contract", "Добавить"))
-        self.back_to_contract_btn.setText(_translate("add_contract", "Вернуться в меню клиента"))
+        self.back_to_add_client_btn.setText(_translate("add_contract", "Вернуться к добавлению клиента"))
         self.CostBox.setItemText(0, _translate("add_contract", "Бюджет"))
         self.CostBox.setItemText(1, _translate("add_contract", "Платное обучение"))
 

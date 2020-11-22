@@ -12,6 +12,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_list_hostel(object):
+
+    def openHostel(self):
+        from hostel import Ui_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, list_hostel):
         list_hostel.setObjectName("list_hostel")
         list_hostel.resize(480, 491)
@@ -123,6 +131,10 @@ class Ui_list_hostel(object):
         self.back_to_hostel_btn.setFont(font)
         self.back_to_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_hostel_btn.setObjectName("back_to_hostel_btn")
+
+        self.back_to_hostel_btn.clicked.connect(self.openHostel)
+        self.back_to_hostel_btn.clicked.connect(list_hostel.close)
+
         self.horizontalLayout.addWidget(self.back_to_hostel_btn)
         self.hostel_info = QtWidgets.QListWidget(self.centralwidget)
         self.hostel_info.setGeometry(QtCore.QRect(20, 89, 440, 371))

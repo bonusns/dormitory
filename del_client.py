@@ -13,8 +13,16 @@ import database as dbd
 
 class Ui_del_client(object):
 
+    def openClient(self):
+        from Client import Ui_Client
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Client()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def fill_list(self):
         '''заполняет список'''
+
         fio = self.FIO_line.text()
         # чистить
         mas = dbd.search_student(fio)
@@ -23,6 +31,7 @@ class Ui_del_client(object):
             self.Client_list.addItem('ФИО: ' + person[3]['ФИО']+'\n'\
                                      + 'Общежитие: ' + person[1] + ', Комната: ' + person[2] + '\n'\
                                      + 'Номер договора: ' + person[3]['Шифр договора'])
+
 
     def delete_student(self):
         fio = self.FIO_line.text()
@@ -272,6 +281,10 @@ class Ui_del_client(object):
         self.back_to_client_btn.setFont(font)
         self.back_to_client_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_client_btn.setObjectName("back_to_client_btn")
+
+        self.back_to_client_btn.clicked.connect(self.openClient)
+        self.back_to_client_btn.clicked.connect(del_client.close)
+
         self.horizontalLayout.addWidget(self.back_to_client_btn)
         self.label_FIO_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_FIO_2.setGeometry(QtCore.QRect(60, 110, 130, 30))

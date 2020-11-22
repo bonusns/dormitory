@@ -12,6 +12,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_red_hostel(object):
+
+    def openRed(self):
+        from red_hostel_2 import Ui_red_hostel_2
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_red_hostel_2()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openHostel(self):
+        from hostel import Ui_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, red_hostel):
         red_hostel.setObjectName("red_hostel")
         red_hostel.resize(680, 300)
@@ -211,6 +226,9 @@ class Ui_red_hostel(object):
         self.find_hostel_btn.setFont(font)
         self.find_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.find_hostel_btn.setObjectName("find_hostel_btn")
+
+
+
         self.horizontalLayout.addWidget(self.find_hostel_btn)
         self.back_to_hostel_btn = QtWidgets.QPushButton(self.layoutWidget)
         self.back_to_hostel_btn.setMinimumSize(QtCore.QSize(150, 40))
@@ -259,6 +277,10 @@ class Ui_red_hostel(object):
         self.back_to_hostel_btn.setFont(font)
         self.back_to_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_hostel_btn.setObjectName("back_to_hostel_btn")
+
+        self.back_to_hostel_btn.clicked.connect(self.openHostel)
+        self.back_to_hostel_btn.clicked.connect(red_hostel.close)
+
         self.horizontalLayout.addWidget(self.back_to_hostel_btn)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(80, 120, 47, 13))
@@ -317,6 +339,10 @@ class Ui_red_hostel(object):
         self.red_hostel_btn.setFont(font)
         self.red_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.red_hostel_btn.setObjectName("red_hostel_btn")
+
+        self.red_hostel_btn.clicked.connect(self.openRed)
+        self.red_hostel_btn.clicked.connect(red_hostel.close)
+
         self.Hostel_list = QtWidgets.QListWidget(self.centralwidget)
         self.Hostel_list.setGeometry(QtCore.QRect(40, 220, 400, 60))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)

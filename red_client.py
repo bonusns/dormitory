@@ -12,6 +12,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_red_client(object):
+
+    def openClient(self):
+        from Client import Ui_Client
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Client()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openRed_client_2(self):
+        from red_client_2 import Ui_red_client_2
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_red_client_2()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def setupUi(self, red_client):
         red_client.setObjectName("red_client")
         red_client.resize(680, 300)
@@ -252,6 +267,10 @@ class Ui_red_client(object):
         self.back_to_client_btn.setFont(font)
         self.back_to_client_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_client_btn.setObjectName("back_to_client_btn")
+
+        self.back_to_client_btn.clicked.connect(self.openClient)
+        self.back_to_client_btn.clicked.connect(red_client.close)
+
         self.horizontalLayout.addWidget(self.back_to_client_btn)
         self.label_FIO_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_FIO_2.setGeometry(QtCore.QRect(60, 110, 130, 30))
@@ -310,6 +329,10 @@ class Ui_red_client(object):
         self.red_client_btn.setFont(font)
         self.red_client_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.red_client_btn.setObjectName("red_client_btn")
+
+        self.red_client_btn.clicked.connect(self.openRed_client_2)
+        self.red_client_btn.clicked.connect(red_client.close)
+
         self.Client_list = QtWidgets.QListWidget(self.centralwidget)
         self.Client_list.setGeometry(QtCore.QRect(60, 200, 400, 60))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)

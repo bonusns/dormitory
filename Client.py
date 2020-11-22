@@ -14,16 +14,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Client(object):
 
     def openAdd(self):
-        from Add_Client import Ui_Add_Client
+        from Add_Client import Ui_add_client
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Add_Client()
+        self.ui = Ui_add_client()
         self.ui.setupUi(self.window)
         self.window.show()
 
+    def openList(self):
+        from list_client import Ui_list_client
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_list_client()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     def openMain(self):
         from Main import Ui_Main
-
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_Main()
         self.ui.setupUi(self.window)
@@ -327,6 +332,10 @@ class Ui_Client(object):
         self.list_client_btn.setFont(font)
         self.list_client_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.list_client_btn.setObjectName("list_client_btn")
+
+        self.list_client_btn.clicked.connect(self.openList)
+        self.list_client_btn.clicked.connect(Client.close)
+
         self.gridLayout.addWidget(self.list_client_btn, 0, 2, 1, 1)
         spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 0, 1, 1, 1)

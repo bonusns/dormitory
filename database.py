@@ -1,3 +1,4 @@
+# coding=utf-8
 import pyrebase
 import random
 
@@ -48,11 +49,11 @@ def update_rooms_status():
 
 
 # функции студента
-def add_student(fio, phone, passport, address, educ_form, contract, room, dormitory):
+def add_student(fio, phone, passport, address, educ_form, sex, room, dormitory):
     '''строка в формате'''
     db = init_firebase(firebaseConfig)
     student_data = {'ФИО': fio, 'Телефон': phone, 'Паспорт': passport, 'Адрес регистрации': address,
-                    'Форма обучения': educ_form, 'Шифр договора': contract}
+                    'Форма обучения': educ_form, 'Пол': sex}
 
     fio_mas = student_data['ФИО'].split()
     # добавление в бд

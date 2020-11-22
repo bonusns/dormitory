@@ -15,6 +15,13 @@ import database
 
 class Ui_add_hostel(object):
 
+    def openHostel(self):
+        from hostel import Ui_hostel
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_hostel()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def add_hostel(self):
         number = self.Number_line.text()
         address = self.Addres_line.text()
@@ -264,6 +271,10 @@ class Ui_add_hostel(object):
         self.back_to_hostel_btn.setFont(font)
         self.back_to_hostel_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.back_to_hostel_btn.setObjectName("back_to_hostel_btn")
+
+        self.back_to_hostel_btn.clicked.connect(self.openHostel)
+        self.back_to_hostel_btn.clicked.connect(add_hostel.close)
+
         self.horizontalLayout.addWidget(self.back_to_hostel_btn)
         add_hostel.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(add_hostel)
