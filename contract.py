@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import list_contract, del_contract, red_contract, cost, facilities
 
 class Ui_contract(object):
 

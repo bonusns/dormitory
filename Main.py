@@ -9,20 +9,18 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import Client, hostel, contract, reference, database
-import Add_Client, red_client, del_client, list_client
-import database, add_contract
-import add_room, del_room, red_room, list_rooms
-import list_contract, del_contract, red_contract, cost, facilities
-import add_cost, red_cost, list_cost, del_cost
-import add_hostel, red_hostel, rooms, del_hostel, list_hostel           #29
-import add_facility, red_facility, del_facility, list_facilities
-import red_contract_2
-import red_contract_3
-import red_cost_2
-import red_facility_2
-import red_hostel_2
-import red_room_2
-import red_client_2
+import pyrebase
+
+
+
+
+
+
+
+
+
+
+
 
 class Ui_Main(object):
     def openClient(self):

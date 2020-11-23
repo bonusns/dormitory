@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import red_cost_2
 
 class Ui_red_cost(object):
 

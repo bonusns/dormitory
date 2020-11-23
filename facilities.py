@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import add_facility, red_facility, del_facility, list_facilities
 
 
 class Ui_Facilities(object):

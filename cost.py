@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import add_cost, red_cost, list_cost, del_cost
 
 
 class Ui_Cost(object):
