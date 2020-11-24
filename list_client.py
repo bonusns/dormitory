@@ -9,9 +9,20 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import database as dbd
 
 class Ui_list_client(object):
+
+    def fill_list(self):
+        '''заполняет список'''
+
+        mas = dbd.list_student()
+
+        for person in mas:
+            self.Client_info.addItem('ФИО: ' + person[3]['ФИО'] + '\n' \
+                                     + 'Общежитие: ' + person[1] + ', Комната: ' + person[2] + '\n' \
+                                     + 'Пол: ' + person[3]['Пол'])
+
 
     def openClient(self):
         from Client import Ui_Client
@@ -83,6 +94,10 @@ class Ui_list_client(object):
         self.import_client_btn.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.import_client_btn.setObjectName("import_client_btn")
         self.horizontalLayout.addWidget(self.import_client_btn)
+
+
+
+        self.horizontalLayout.addWidget(self.import_client_btn)
         self.back_to_client_btn = QtWidgets.QPushButton(self.layoutWidget)
         self.back_to_client_btn.setMinimumSize(QtCore.QSize(213, 40))
         self.back_to_client_btn.setMaximumSize(QtCore.QSize(213, 16777215))
@@ -142,10 +157,13 @@ class Ui_list_client(object):
         self.Client_info.setStyleSheet("font: 75 10pt \"MS Shell Dlg 2\";\n"
 "selection-color: rgb(85, 170, 255);")
         self.Client_info.setObjectName("Client_info")
+
+
+
         item = QtWidgets.QListWidgetItem()
-        self.Client_info.addItem(item)
+
         item = QtWidgets.QListWidgetItem()
-        self.Client_info.addItem(item)
+
         list_client.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(list_client)
         self.statusbar.setObjectName("statusbar")
@@ -154,6 +172,8 @@ class Ui_list_client(object):
         self.retranslateUi(list_client)
         QtCore.QMetaObject.connectSlotsByName(list_client)
 
+        self.fill_list()
+
     def retranslateUi(self, list_client):
         _translate = QtCore.QCoreApplication.translate
         list_client.setWindowTitle(_translate("list_client", "Список клиентов"))
@@ -161,10 +181,6 @@ class Ui_list_client(object):
         self.back_to_client_btn.setText(_translate("list_client", "Вернуться в меню клиента"))
         __sortingEnabled = self.Client_info.isSortingEnabled()
         self.Client_info.setSortingEnabled(False)
-        item = self.Client_info.item(0)
-        item.setText(_translate("list_client", "addawd"))
-        item = self.Client_info.item(1)
-        item.setText(_translate("list_client", "dtyjhn"))
         self.Client_info.setSortingEnabled(__sortingEnabled)
 
 

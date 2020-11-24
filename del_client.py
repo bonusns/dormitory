@@ -22,21 +22,32 @@ class Ui_del_client(object):
 
     def fill_list(self):
         '''заполняет список'''
-
         fio = self.FIO_line.text()
-        # чистить
         mas = dbd.search_student(fio)
-        #заполняю лист
+
         for person in mas:
-            self.Client_list.addItem('ФИО: ' + person[3]['ФИО']+'\n'\
-                                     + 'Общежитие: ' + person[1] + ', Комната: ' + person[2] + '\n'\
-                                     + 'Номер договора: ' + person[3]['Шифр договора'])
+            self.Client_list.addItem('ФИО: ' + person[3]['ФИО'] + '\n' \
+                                     + 'Общежитие: ' + person[1] + ', Комната: ' + person[2] + '\n' \
+                                     + 'Пол: ' + person[3]['Пол'])
 
 
-    def delete_student(self):
+    def delete_one(self):
         fio = self.FIO_line.text()
+        mas = dbd.list_student()
         n = self.Client_list.currentRow()
         print(n)
+        i = -1
+        for person in mas:
+            if i == n:
+                dic = 'dormitory' + person[1] + '/Rooms/' + person[2] + '/Residents'
+                break
+            i = i+1
+        name = dbd.delete_student(fio,dic)
+        self.FIO_line.clear()
+        self.Client_list.clear()
+
+
+
 
     def setupUi(self, del_client):
         del_client.setObjectName("del_client")
@@ -345,7 +356,7 @@ class Ui_del_client(object):
         self.red_client_btn.setObjectName("red_client_btn")
         self.Client_list = QtWidgets.QListWidget(self.centralwidget)
 
-        self.red_client_btn.clicked.connect(self.delete_student)
+        self.red_client_btn.clicked.connect(self.delete_one)
 
         self.Client_list.setGeometry(QtCore.QRect(60, 200, 400, 60))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)

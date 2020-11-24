@@ -1,7 +1,7 @@
 # coding=utf-8
 import pyrebase
 import random
-
+import firebase
 firebaseConfig = {"apiKey": "AIzaSyA4kKJZi1_QkXL8oAVHNgYfZCzphd29hLw",
                   "authDomain": "dormitory-db.firebaseapp.com",
                   "databaseURL": "https://dormitory-db.firebaseio.com",
@@ -67,11 +67,39 @@ def edit_student():
     pass
 
 
-def delete_student(fio):
-    '''удаление студента'''
-    db = init_firebase(firebaseConfig)
-    searched_mas = search_student(fio)
+def last_name(fio):
+    name_mas = fio.split()
+    name = name_mas[0] + name_mas[1][0] + name_mas[2][0]
 
+
+def delete_student(fio,number):
+    name_mas = fio.split()
+    name = name_mas[0] + name_mas[1][0] + name_mas[2][0]
+    '''удаление студента'''
+    fire = firebase.FirebaseApplication("https://dormitory-db.firebaseio.com")
+    fire.delete(number, name)        #Это удаление конкретно из 300 комнаты, как обойти это я хз
+    return name
+
+def list_student():
+    '''данные формата [(фио,№_общаги,комната,{данные}),(...)]'''
+    db = init_firebase(firebaseConfig)
+    searched_mas = db.get()
+    list_students = []
+    name = 'Residents'
+    for dormitory in searched_mas.each():
+        dorm_number = dormitory.val()['number']
+        rooms = dormitory.val()['Rooms']
+        for room_ind in rooms.keys():
+            room = rooms[room_ind]
+            if name in room.keys():
+                residents = room[name]
+                for FIO in residents.keys():
+
+                    list_students.append((FIO,str(dorm_number),room_ind,residents[FIO]))
+
+
+
+    return list_students
 
 def search_student(fio):
     '''данные формата [(фио,№_общаги,комната,{данные}),(...)]'''
@@ -156,9 +184,6 @@ if __name__ == '__main__':
 
     for r in a.keys():
         print(a[r])
-
-    search_student('Романенко Владимир Юрьевич')
-
 
 
     # for each in searched_mas.each():

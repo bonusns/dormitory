@@ -28,6 +28,8 @@ class Ui_add_client(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
+
+
     def add_client(self):
         fio = self.FIO_line.text()
         passport = self.serial_line.text() + self.number_line.text()
@@ -35,8 +37,17 @@ class Ui_add_client(object):
         phone = self.phone_line.text()
         educ_form = self.FormBox.currentText()
         sex = self.SexBox.currentText()
+        database.add_student(fio,phone,passport,address,educ_form,sex,301,1)
+        self.FIO_line.clear()
+        self.serial_line.clear()
+        self.number_line.clear()
+        self.addres_line.clear()
+        self.phone_line.clear()
+        self.FormBox.setCurrentIndex(-1)
+        self.SexBox.setCurrentIndex(-1)
 
-        database.add_student(fio,phone,passport,address,educ_form,sex,300,1)
+
+
 
     def setupUi(self, add_client):
         add_client.setObjectName("add_client")
@@ -501,7 +512,9 @@ class Ui_add_client(object):
         self.add_client_btn.setObjectName("add_client_btn")
 
         self.add_client_btn.clicked.connect(self.add_client)
-        self.add_client_btn.clicked.connect(add_client.close)
+
+
+
 
         self.horizontalLayout.addWidget(self.add_client_btn)
         self.add_contract_btn = QtWidgets.QPushButton(self.layoutWidget)
