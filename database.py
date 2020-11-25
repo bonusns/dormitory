@@ -1,24 +1,28 @@
 # coding=utf-8
 import pyrebase
 import random
-import firebase
-firebaseConfig = {"apiKey": "AIzaSyA4kKJZi1_QkXL8oAVHNgYfZCzphd29hLw",
-                  "authDomain": "dormitory-db.firebaseapp.com",
-                  "databaseURL": "https://dormitory-db.firebaseio.com",
-                  "projectId": "dormitory-db",
-                  "storageBucket": "dormitory-db.appspot.com",
-                  "messagingSenderId": "1092306821309",
-                  "appId": "1:1092306821309:web:b610b8bea4de692c49d7d4"}
 
+def noquote(s):
+    return s
+pyrebase.pyrebase.quote = noquote
 
-def init_firebase(firebaseConfig):
-    firebase = pyrebase.initialize_app(firebaseConfig)
-    return firebase.database()
+firebaseConfig = {'apiKey': "AIzaSyCcFUTbszDhbcZxCuXqM85MWr80FPhvY58",
+   'authDomain': "dormitory-c5829.firebaseapp.com",
+    'databaseURL': "https://dormitory-c5829.firebaseio.com",
+    'projectId': "dormitory-c5829",
+    'storageBucket': "dormitory-c5829.appspot.com",
+    'messagingSenderId': "282371830331",
+    'appId': "1:282371830331:web:c8c5c754d20184a045221e",
+    'measurementId': "G-QZSM07QZ73"}
 
+db = pyrebase.initialize_app(firebaseConfig).database()
+
+# def init_firebase(firebaseConfig):
+#
+#     return firebase.database()
 
 # функции общежития
 def add_dormitory(number,address):
-    db = init_firebase(firebaseConfig)
     dormitoryData = {'number': number, 'Rooms': {0:''}, 'name': 'Общежитие ' + str(number), 'Адрес':address}
     db.child('dormitory' + str(number)).set(dormitoryData)
 
@@ -34,7 +38,6 @@ def update_number_of_rooms():
 
 # функции комнаты
 def add_room(dormitory, number, capacity):
-    db = init_firebase(firebaseConfig)
     roomData = {'number': number, 'capacity': capacity, 'occupied': 0, 'status': 'Свободна'}
     db.child('dormitory' + str(dormitory)).child('Rooms').child(roomData['number']).set(roomData)
 
@@ -49,16 +52,15 @@ def update_rooms_status():
 
 
 # функции студента
-def add_student(fio, phone, passport, address, educ_form, sex, room, dormitory):
-    '''строка в формате'''
-    db = init_firebase(firebaseConfig)
+def add_student(fio, phone, passport, address, educ_form, gender, dormitory):
+    '''добавление студента'''
     student_data = {'ФИО': fio, 'Телефон': phone, 'Паспорт': passport, 'Адрес регистрации': address,
-                    'Форма обучения': educ_form, 'Пол': sex}
+                    'Форма обучения': educ_form, 'Пол': gender, 'Комната':'queue', 'Общежитие':dormitory}
 
     fio_mas = student_data['ФИО'].split()
+    name_tag = fio_mas[0] + fio_mas[1][0] + fio_mas[2][0]
     # добавление в бд
-    db.child('dormitory' + str(dormitory)).child('Rooms').child(room).child('Residents'). \
-        child(fio_mas[0] + fio_mas[1][0] + fio_mas[2][0]).set(student_data)
+    db.child('clients').child(name_tag).set(student_data)
 
 # добавить в бомжатник
 
@@ -67,57 +69,30 @@ def edit_student():
     pass
 
 
-def last_name(fio):
-    name_mas = fio.split()
-    name = name_mas[0] + name_mas[1][0] + name_mas[2][0]
-
-
-def delete_student(fio,number):
-    name_mas = fio.split()
-    name = name_mas[0] + name_mas[1][0] + name_mas[2][0]
+def delete_student(fio):
     '''удаление студента'''
-    fire = firebase.FirebaseApplication("https://dormitory-db.firebaseio.com")
-    fire.delete(number, name)        #Это удаление конкретно из 300 комнаты, как обойти это я хз
-    return name
+    searched_mas = search_student(fio)
 
-def list_student():
-    '''данные формата [(фио,№_общаги,комната,{данные}),(...)]'''
-    db = init_firebase(firebaseConfig)
-    searched_mas = db.get()
-    list_students = []
-    name = 'Residents'
-    for dormitory in searched_mas.each():
-        dorm_number = dormitory.val()['number']
-        rooms = dormitory.val()['Rooms']
-        for room_ind in rooms.keys():
-            room = rooms[room_ind]
-            if name in room.keys():
-                residents = room[name]
-                for FIO in residents.keys():
-
-                    list_students.append((FIO,str(dorm_number),room_ind,residents[FIO]))
-
-
-
-    return list_students
 
 def search_student(fio):
     '''данные формата [(фио,№_общаги,комната,{данные}),(...)]'''
-    db = init_firebase(firebaseConfig)
     name_mas = fio.split()
     name = name_mas[0] + name_mas[1][0] + name_mas[2][0]
-    searched_mas = db.get()
-    searched_students = []
-    for dormitory in searched_mas.each():
-        dorm_number = dormitory.val()['number']
-        rooms = dormitory.val()['Rooms']
-        for room_ind in rooms.keys():
-            room = rooms[room_ind]
-            if 'Residents' in room.keys():
-                residents = room['Residents']
-                if name in residents.keys():
-                    searched_students.append((name,str(dorm_number),room_ind,residents[name]))
-    return searched_students
+
+    searched_names = db.child('clients').order_by_child('ФИО').equal_to(fio).get()
+    print(searched_names.each())
+
+    # searched_students = []
+    # for dormitory in searched_mas.each():
+    #     dorm_number = dormitory.val()['number']
+    #     rooms = dormitory.val()['Rooms']
+    #     for room_ind in rooms.keys():
+    #         room = rooms[room_ind]
+    #         if 'Residents' in room.keys():
+    #             residents = room['Residents']
+    #             if name in residents.keys():
+    #                 searched_students.append((name,str(dorm_number),room_ind,residents[name]))
+    # return searched_students
 
 
 
@@ -180,10 +155,16 @@ def list_off_all_students():
 # добавляю жителей
 
 if __name__ == '__main__':
-    a = {'ab':{'e':'f'}, 'c':{'j':'h'}}
+    # a = {'ab':{'e':'f'}, 'c':{'j':'h'}}
+    #
+    # for r in a.keys():
+    #     print(a[r])
+    # add_student('Romanenko V Y','88005553535','324343234','Москва','бюджет','мужской',1)
 
-    for r in a.keys():
-        print(a[r])
+    # search_student('Романенко Владимир Юрьевич')
+
+    print(db.child('dormitories').order_by_child('number').equal_to(1).get())
+
 
 
     # for each in searched_mas.each():
