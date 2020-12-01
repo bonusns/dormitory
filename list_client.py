@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import database as dbd
+from dormitory import database as dbd
+
 
 class Ui_list_client(object):
 

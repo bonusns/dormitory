@@ -1,4 +1,4 @@
-from database import *
+from dormitory.database import *
 
 
 def init_room():

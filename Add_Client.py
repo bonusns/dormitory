@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import database, add_contract
+# from dormitory import database
 
 
 class Ui_add_client(object):
@@ -37,7 +37,7 @@ class Ui_add_client(object):
         phone = self.phone_line.text()
         educ_form = self.FormBox.currentText()
         sex = self.SexBox.currentText()
-        database.add_student(fio,phone,passport,address,educ_form,sex,301,1)
+        database.add_student(fio, phone, passport, address, educ_form, sex, 301, 1)
         self.FIO_line.clear()
         self.serial_line.clear()
         self.number_line.clear()
